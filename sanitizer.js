@@ -48,8 +48,7 @@ function sanitizer (buffer, options) {
       var valid;
       var lkey = lowercase(key);
       if (lkey === 'class' && attrsOk.indexOf(lkey) === -1) {
-        value = value.split(' ').filter(isValidClass).join(' ').trim();
-        valid = value.length;
+        value = !value || value.split(' ').filter(isValidClass).join(' ').trim().length;
       } else {
         valid = attrsOk.indexOf(lkey) !== -1 && (attributes.uris[lkey] !== true || testUrl(value));
       }
