@@ -1,6 +1,6 @@
 {
   "name": "sanitize-markdown",
-  "version": "2.6.3",
+  "version": "2.6.4",
   "description": "Lean and configurable allowlist-oriented HTML sanitizer",
   "repository": {
     "type": "git",
