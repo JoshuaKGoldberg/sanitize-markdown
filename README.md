@@ -1,37 +1,41 @@
-# insane
+# sanitize-markdown
 
-> Lean and configurable whitelist-oriented HTML sanitizer
+> Lean and configurable allowlist-oriented HTML sanitizer
+
+---
+
+> ⚠️ **A temporary fork of https://github.com/bevacqua/insane while https://github.com/bevacqua/insane/issues/16 is pending** ⚠️
+
+---
 
 Works well in browsers, as its footprint size is very small _(around **~2kb** gzipped)_. API inspired by [`sanitize-html`][1] _(which is around **100kb** gzipped)_.
 
-<sub>**You would be insane not to use this!**</sub>
-
-# Install
+## Install
 
 ```shell
-npm install insane --save
+npm install sanitize --save
 ```
 
-# Usage
+## Usage
 
 ```js
-insane('<div>foo<span>bar</span></div>', { allowedTags: ['div'] })
+sanitizeMarkdown('<div>foo<span>bar</span></div>', { allowedTags: ['div'] })
 // <- '<div>foo</div>'
 ```
 
-Contrary to similar sanitizers, `insane` drops the whole tree of descendants for elements that aren't allowed tags.
+Contrary to similar sanitizers, `sanitize-markdown` drops the whole tree of descendants for elements that aren't allowed tags.
 
-# API
+## API
 
-# `insane(html, options?, strict?)`
+### `sanitizeMarkdown(html, options?, strict?)`
 
 - `html` can be an arbitrary HTML string
 - `options` are detailed below
-- `strict` means that `options` won't be based off of [insane.defaults](#defaults) if set to `true`
+- `strict` means that `options` won't be based off of [sanitizeMarkdown.defaults](#defaults) if set to `true`
 
 The parser takes into account that some elements can be self-closing. For safety reasons the sanitizer will only accept a valid URL for `background`, `base`, `cite`, `href`, `longdesc`, `src`, and `usemap` elements. **"Valid URL"** means that it begins with either `#`, `/`, or any of `options.allowedSchemes` _(followed by `:`)_.
 
-## `options`
+### `options`
 
 [Sensible defaults](#defaults) are provided. You can override specific options as needed.
 
@@ -43,12 +47,12 @@ Defaults to `['http', 'https', 'mailto']`.
 
 An array of tags that you'll allow in the resulting HTML.
 
-###### Example
+##### Example
 
 > Only allow spans, discarding the rest of elements.
 
 ```js
-insane('<div>foo</div><span>bar</span>', {
+sanitizeMarkdown('<div>foo</div><span>bar</span>', {
   allowedTags: ['span']
 });
 // <- '<span>bar</span>'
@@ -58,12 +62,12 @@ insane('<div>foo</div><span>bar</span>', {
 
 An object describing the attributes you'll allow for each individual tag name.
 
-###### Example
+##### `allowedAttributes` Example
 
 > Only allow spans, and only allow those spans to have an `id` _(discarding the rest of their attributes)_.
 
 ```js
-insane('<span id="bar" class="super">bar</span>', {
+sanitizeMarkdown('<span id="bar" class="super">bar</span>', {
   allowedTags: ['span'],
   allowedAttributes: { span: ['id'] }
 });
@@ -72,14 +76,14 @@ insane('<span id="bar" class="super">bar</span>', {
 
 #### `allowedClasses`
 
-If `'class'` is listed as an allowed attribute, every single class will be allowed. If you don't list `'class'` as an allowed attribute, you can provide a class whitelist per tag name.
+If `'class'` is listed as an allowed attribute, every single class will be allowed. If you don't list `'class'` as an allowed attribute, you can provide a class allowlist per tag name.
 
-###### Example
+##### `allowedClasses` Example
 
 > Only allow spans to have `super` or `bad` class names, discarding the rest of them.
 
 ```js
-insane('<span class="super mean and bad">bar</span>', {
+sanitizeMarkdown('<span class="super mean and bad">bar</span>', {
   allowedTags: ['span'],
   allowedClasses: { span: ['super', 'bad'] }
 });
@@ -91,11 +95,11 @@ insane('<span class="super mean and bad">bar</span>', {
 Takes a `function(token)` that allows you to do additional validation beyond exact tag name and attribute matching. The `token` object passed to your filter contains the following properties.
 
 - `tag` is the lowercase tag name of the element
-- `attrs` is an object containing _every_ attribute in the element, **including** those that may not be in the whitelist
+- `attrs` is an object containing _every_ attribute in the element, **including** those that may not be in the allowlist
 
 If you return a falsy value the element and all of its descendants will not be included in the output. Note that you are allowed to change the `attrs`, and even add new ones, transforming the output.
 
-###### Example
+##### `filter` Example
 
 > Require that `<span>` elements have an `aria-label` value.
 
@@ -103,7 +107,7 @@ If you return a falsy value the element and all of its descendants will not be i
 function filter (token) {
   return token.tag !== 'span' || token.attrs['aria-label'];
 }
-insane('<span aria-label="a foo">foo</span><span>bar</span>', {
+sanitizeMarkdown('<span aria-label="a foo">foo</span><span>bar</span>', {
   allowedTags: ['span'],
   allowedAttributes: { span: ['aria-label'] },
   filter: filter
@@ -117,7 +121,7 @@ Takes a `function(text)` that allows you to modify text content in HTML elements
 
 ## Defaults
 
-The default configuration is used if you don't provide any. This object is available at `insane.defaults`. You are free to manipulate the defaults themselves.
+The default configuration is used if you don't provide any. This object is available at `sanitizeMarkdown.defaults`. You are free to manipulate the defaults themselves.
 
 ```json
 {
@@ -139,7 +143,7 @@ The default configuration is used if you don't provide any. This object is avail
 }
 ```
 
-# License
+## License
 
 MIT
 

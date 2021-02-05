@@ -1,5 +1,5 @@
 
-- Add 'u' tag to accepted whitelist.
+- Add 'u' tag to accepted allowlist.
 
 # 2.5.1 Self-Filter
 
@@ -39,8 +39,8 @@
 
 # 2.1.0 Label Maker
 
-- Added `title`, and `aria-label` to the `a` attribute whitelist
-- Added `title`, `aria-label`, and `alt` to the `img` attribute whitelist
+- Added `title`, and `aria-label` to the `a` attribute allowlist
+- Added `title`, `aria-label`, and `alt` to the `img` attribute allowlist
 
 # 2.0.0 Sane Defaults
 

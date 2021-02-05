@@ -1,18 +1,18 @@
 {
-  "name": "insane",
+  "name": "sanitize-markdown",
   "version": "2.6.2",
-  "description": "Lean and configurable whitelist-oriented HTML sanitizer",
+  "description": "Lean and configurable allowlist-oriented HTML sanitizer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bevacqua/insane.git"
+    "url": "https://github.com/JoshuaKGoldberg/sanitize-markdown.git"
   },
-  "author": "Nicolas Bevacqua <nicolasbevacqua@gmail.com> (https://ponyfoo.com/)",
+  "author": "Josh Goldberg <me@joshuakgoldberg.com> (https://ponyfoo.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bevacqua/insane/issues"
+    "url": "https://github.com/JoshuaKGoldberg/sanitize-markdown/issues"
   },
-  "homepage": "https://github.com/bevacqua/insane",
-  "main": "insane.js",
+  "homepage": "https://github.com/JoshuaKGoldberg/sanitize-markdown",
+  "main": "sanitize-markdown.js",
   "browser": {
     "he": "./she.js"
   },
